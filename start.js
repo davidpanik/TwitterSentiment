@@ -1,10 +1,9 @@
-var Twit = require('twit');
-var idString = '#got';
-var details = require('./twitter_details')
-
-var T = new Twit(details);
-
-var stream = T.stream('statuses/filter', { track: idString });
+var twit      = require('twit');
+var sentiment = require('sentiment');
+var details   = require('./twitter_details')
+var idString  = '#got';
+var T         = new twit(details);
+var stream    = T.stream('statuses/filter', { track: idString });
 
 stream.on('connect', function(request) {
 	console.log('Connected to Twitter API');
@@ -21,4 +20,6 @@ stream.on('reconnect', function (request, response, connectInterval) {
 // Start listening for tweets
 stream.on('tweet', function(tweet) {
 	console.log(tweet.created_at + ' ' + tweet.user.name + ' says:  ' + tweet.text);
+	console.log(sentiment(tweet.text).score);
+	console.log('');
 });
