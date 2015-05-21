@@ -1,0 +1,11 @@
+{
+	"name": "twitter-sentiment",
+	"version": "0.1.0",
+	"devDependencies": {
+		"express":        "latest",
+		"socket.io":      "latest",
+		"open":           "latest",
+		"twit":           "latest",
+		"sentiment":      "latest"
+	}
+}
