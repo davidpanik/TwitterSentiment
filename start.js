@@ -1,12 +1,8 @@
 var Twit = require('twit');
 var idString = '#got';
+var details = require('./twitter_details')
 
-var T = new Twit({
-	consumer_key:         '',
-	consumer_secret:      '',
-	access_token:         '',
-	access_token_secret:  ''
-});
+var T = new Twit(details);
 
 var stream = T.stream('statuses/filter', { track: idString });
 
