@@ -31,9 +31,14 @@ function testTweets(idString) {
 // Test books on Project Gutenberg
 function testGutenberg() {
 	var fs = require('fs');
+	var fetch = require('./fetch');
 
-	var text = fs.readFileSync('david_copperfield.txt') + '';
-	console.log(sentiment(text).score);	
+	fetch('https://www.gutenberg.org/cache/epub/766/pg766.txt', function(data) {
+		console.log(sentiment(data).score);
+	});
+
+	// var text = fs.readFileSync('david_copperfield.txt') + '';
+	// console.log(sentiment(text).score);
 }
 
 

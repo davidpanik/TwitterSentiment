@@ -6,6 +6,7 @@
 		"socket.io":      "latest",
 		"open":           "latest",
 		"twit":           "latest",
-		"sentiment":      "latest"
+		"sentiment":      "latest",
+		"request":        "latest"
 	}
 }
