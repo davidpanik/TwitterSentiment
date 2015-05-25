@@ -30,18 +30,29 @@ function testTweets(idString) {
 
 // Test books on Project Gutenberg
 function testGutenberg() {
-	var fs = require('fs');
 	var fetch = require('./fetch');
+	var cheerio = require('cheerio');
 
-	fetch('https://www.gutenberg.org/cache/epub/766/pg766.txt', function(data) {
-		console.log(sentiment(data).score);
+	// Scrape top 100 books from Gutenberg
+	fetch('https://www.gutenberg.org/browse/scores/top', function(html) {
+		var $ = cheerio.load(html);
+		var books = $('#books-last30').next('ol').find('a');
+
+		books.each(function(i, elem) {
+			var id    = elem.attribs.href.replace('/ebooks/', ''); // Extract the book ID
+			var title = elem.children[0].data;
+			var url   = 'https://www.gutenberg.org/cache/epub/' + id + '/pg' + id + '.txt';
+			
+			getBook(title, url); // Fetch and test individual book
+		});
 	});
 
-	// var text = fs.readFileSync('david_copperfield.txt') + '';
-	// console.log(sentiment(text).score);
+	function getBook(title, url) {
+		fetch(url, function(data) {
+			console.log(title + ' = ' + sentiment(data).score);
+		});		
+	}
 }
-
-
 
 //testTweets('#got');
 

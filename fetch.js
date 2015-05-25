@@ -1,7 +1,7 @@
 var request = require('request');
 
 var queue = []; // Stack up requests here
-var throttleDelay = 300; // Delay in MS between requests
+var throttleDelay = 1000; // Delay in MS between requests
 var maxRetries    = 4; // Number of times to reattempt a failed call
 
 
